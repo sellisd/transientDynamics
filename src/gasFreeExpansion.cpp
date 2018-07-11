@@ -6,61 +6,47 @@
 #include "entropy.h"
 #include "system.h"
 
+using namespace std;
+
 void gasFreeExpansion::step(randomv &r){
-  for(unsigned int i = 0; i<x.size(); i++){
-    int x2 = x.at(i);
-    int y2 = y.at(i);
-    int direction = r.sampleUniformInt(4); // 0 1 2 3 : b l u r
-    switch(direction){
+  bool success = false;
+  while (success != true) {
+    int x1 = r.sampleUniformInt(system::getSide());
+    int y1 = r.sampleUniformInt(system::getSide());
+    int neighbor = r.sampleUniformInt(4); // 0 1 2 3 = b l u r
+    int x2=x1;
+    int y2=y1;
+    switch(neighbor){
     case 0:{
       x2++;
-      break;}
-    case 1:{
+      break;
+    }case 1:{
       y2--;
-      break;}
-    case 2:{
+      break;
+    }case 2:{
       x2--;
-      break;}
-    case 3:{
+      break;
+    }case 3:{
       y2++;
-      break;}
-    default:
+      break;
+    }default:
       exit(1);
     }
-    this->move(i,x2,y2);
-  }
-}
-
-void gasFreeExpansion::move(int i, int x2, int y2){
-  x2 = x2 % system::getSide();
-  y2 = y2 % system::getSide();
-  if(x2<0){x2 += system::getSide();}
-  if(y2<0){y2 += system::getSide();}
-  x.at(i) = x2;
-  y.at(i) = y2;
-}
-/**
-* Create a vector of particles
-* @param[in] i   Particle index (order in vector).
-* @param[in] x2  x-axis coordinate of new particle location.
-* @param[in] y2  y-axis coordinate of new particle location.
-* @return              Nothing
-*/
-
-void gasFreeExpansion::makeGrid(vector<vector<int> > & grid){
-  // Create vector of size side*side filled with 0
-  vector<int> vectorS(system::getSide()*system::getSide(),0);
-  for(unsigned int i = 0; i< x.size(); ++i){
-    vector<int>::iterator it = vectorS.begin();
-    it+=(x.at(i) + system::getSide()*y.at(i));
-    (*it)++;
-  }
-  //make grid from vector to use with entropyFunctions
-  for(int i = 0; i < system::getSide(); i++){
-    vector<int> row;
-    for( int j = 0; j < system::getSide(); j++){
-      row.push_back(vectorS.at(i+j*system::getSide()));
+    if(swap(x1,y1, x2,y2)){
+      success = true;
     }
-    grid.push_back(row);
+  }
+  system::step(r);
+}
+
+int gasFreeExpansion::swap(int x1,int y1, int x2, int y2){
+  int a = system::get(x1,y1);
+  int b = system::get(x2,y2);
+  if(a != b){
+    system::set(x1,y1,b);
+    system::set(x2,y2,a);
+    return 1;
+  }else{
+    return 0;
   }
 }

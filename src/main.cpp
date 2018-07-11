@@ -6,7 +6,6 @@
 #include <math.h>
 #include "randomv.h"
 #include "gameOfLife.h"
-#include "gasFreeExpansionI.h"
 #include "gasFreeExpansion.h"
 #include "entropy.h"
 
@@ -19,9 +18,8 @@ command line parameters:
 side model replicates Tmax by
 
 Options
-1:     Game of Life
-2:     Gas free expansion with interactions
-3:     Gas free expansion
+1:     Gas free expansion
+3:     Game of Life
    */
 int x;
 int model;
@@ -62,22 +60,16 @@ vout.open (vfileS, std::ofstream::out);
 randomv r;
 for (int replicate = 0; replicate < replicates; replicate++){
   switch(model){
-    case 1:{         // Game of Life
-      gameOfLife g(x);
-      g.fillSquare(r, squareSide, squareFillingProb);
-      g.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
-      break;
-    }
-    case 2:{        // Gas free expansion with interactions
-      gasFreeExpansionI gasFreeExpansionInteracting(x);
-      gasFreeExpansionInteracting.fillSquare(r, squareSide, squareFillingProb);
-      gasFreeExpansionInteracting.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
-      break;
-    }
-    case 3:{        // Gas free expansion
+    case 1:{        // Gas free expansion
       gasFreeExpansion gasFreeExpansion(x);
       gasFreeExpansion.fillSquare(r, squareSide, squareFillingProb);
       gasFreeExpansion.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
+      break;
+    }
+    case 2:{         // Game of Life
+      gameOfLife g(x);
+      g.fillSquare(r, squareSide, squareFillingProb);
+      g.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
       break;
     }default:
       exit(1);

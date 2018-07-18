@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <cmath>
 #include "system.h"
 #include "randomv.h"
 #include "entropy.h"
@@ -43,18 +44,38 @@ int system::get(int i, int j){
   return grid.at(i).at(j);
 }
 
-int system::randomState(void){
-  return(1);
-}
-
 void system::fillSquare(randomv & r, int window, double p){
   for( int i = (side-window)/2; i <(side-window)/2+window; i++){
     for(int j = (side-window)/2; j <(side-window)/2+window; j++){
       if(r.sampleUniform()<p){
-        this->set(i, j, randomState());
+        this->set(i, j, 1);
       }
     }
   }
+}
+
+void system::fillRandom(randomv &r, double p){
+  for( int i = 0; i < side; i++ ){
+    for( int j = 0; j < side; j++){
+      if(r.sampleUniform()<p){
+	this->set(i, j, 1);
+      }
+    }
+  }
+}
+
+void system::gradientLinear(randomv &r){
+  for( int i = 0; i < side; i++){
+    for(int j = 0; j < side; j++){
+      if(r.sampleUniform()< sigmoid(1, 10, 0.5, double(j)/double(side))){
+        this->set(i, j, 1);
+      }
+    }
+  }
+}
+
+double system::sigmoid(double L, double k, double x0, double x){
+  return(L/(1. + exp(-k*(x-x0))));
 }
 
 void system::tick(void){

@@ -16,11 +16,20 @@ Rscript -e 'library(rmarkdown); rmarkdown::render("figs.Rmd", "html_document")'
 ```{r, loadLibraries}
 library(tidyverse)
 library(latex2exp)
+library(cowplot)
 source("~/Dropbox/transientDynamics/analysis/funcs.R")
 theme_set(theme_classic())
 ```
 
 ```{r, loadData}
+gradientV <- read.table("~/Dropbox/transientDynamics/data/gradient.vector.dat", stringsAsFactors = FALSE)
+gradientS <- read_delim("~/Dropbox/transientDynamics/data/gradient.statistics.dat", delim = "\t")
+gradientW <- read.table("~/Dropbox/transientDynamics/data/gradient.window.dat", stringsAsFactors = FALSE, header = TRUE)
+
+uniformV <- read.table("~/Dropbox/transientDynamics/data/uniform.vector.dat", stringsAsFactors = FALSE)
+uniformS <- read_delim("~/Dropbox/transientDynamics/data/uniform.statistics.dat", delim = "\t")
+uniformW <- read.table("~/Dropbox/transientDynamics/data/uniform.window.dat", stringsAsFactors = FALSE, header = TRUE)
+
 gfeV<-read.table("~/Dropbox/transientDynamics/data/gfe.vector.dat", stringsAsFactors = FALSE)
 golV<-read.table("~/Dropbox/transientDynamics/data/gol.vector.dat", stringsAsFactors = FALSE)
 
@@ -35,6 +44,37 @@ golS <- read.table("~/Dropbox/transientDynamics/data/gol.statistics.dat", string
 
 gfesp <- read_tsv("~/Dropbox/transientDynamics/data/gfe100.statistics.dat")
 golsp <- read_tsv("~/Dropbox/transientDynamics/data/gol100.statistics.dat")
+
+```
+
+```{r, gradients}
+p1 <- (uniformW %>% 
+  bind_rows(gradientW) %>% 
+  filter(window == 1) %>% 
+  ggplot(aes(x = replicate, y = K)) + geom_bar(stat ='identity'))
+
+p2 <- (uniformW %>% 
+  bind_rows(gradientW) %>% 
+  filter(window == 1) %>% 
+  ggplot(aes(x = replicate, y = H)) + geom_bar(stat ='identity'))
+l <- 10
+drawPlots <- FALSE
+df <- data.frame(Dimension = numeric(l),
+                 Pvalue    = numeric(l),
+                 r2        = numeric(l))
+
+for(i in c(0:8)){
+  df[i+1,] <- plotScalc(uniformW[uniformW$replicate == i,], drawPlot = drawPlots)
+}
+df[10,] <- plotScalc(gradientW, drawPlot = drawPlots)
+df$Label <- c("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "gradient")
+p3 <- (df %>% 
+  ggplot(aes(x = Label, y = Dimension)) + geom_bar(stat = 'identity'))
+
+gradient <- plot_grid(p1, p2, p3, labels = c("A", "B", "C"), ncol = 1, align = "v")
+save_plot(png("../ms/figs/figureGradient.png",
+          gradient,
+          base_aspect_ratio = 1.7))
 
 ```
 
@@ -99,6 +139,10 @@ j <- left_join(a, b, by = "generation")
 df <- gather(j, "Measure", "Complexity", K, Kratio)
 ggplot(df, aes(x = generation, y = Complexity)) + geom_line() + facet_grid(Measure~.) + facet_grid(Measure ~ ., scales = "free_y") + geom_hline(data=data.frame(xint=1,Measure="Kratio"),aes(yintercept=xint),linetype="dotted")
 dev.off()
+df %>% mutate(nextRow = lag(Complexity),
+              DK = Complexity - nextRow
+              ) %>% 
+  ggplot(aes(x=generation, y = DK)) + geom_bar(stat = 'identity')
 ```
 
 ```{r, complexityFluctuationsSGol, fig.cap = "Figure S3"}

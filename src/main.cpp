@@ -5,9 +5,11 @@
 #include <map>
 #include <math.h>
 #include "randomv.h"
+#include "system.h"
 #include "gameOfLife.h"
 #include "gasFreeExpansion.h"
 #include "entropy.h"
+
 
 using namespace std;
 
@@ -19,8 +21,10 @@ side model replicates Tmax by
 
 Options
 1:     Gas free expansion
-3:     Game of Life
-   */
+2:     Game of Life
+3:     Gradient
+4:     Uniform
+*/
 int x;
 int model;
 int replicates;
@@ -71,9 +75,21 @@ for (int replicate = 0; replicate < replicates; replicate++){
       g.fillSquare(r, squareSide, squareFillingProb);
       g.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
       break;
-    }default:
+    }case 3:{
+      class system gradient(x);
+      gradient.gradientLinear(r);
+      gradient.run(0, 0, r, sout, wout, vout, entropyFunctions, 1, 1, 1);
+      break;
+     }case 4:{
+	double densities[] = {0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9};
+	for( int counter = 0; counter < 9; counter++){
+	  class system uniform(x);
+	  uniform.fillRandom(r, densities[counter]);
+	  uniform.run(counter, 0, r, sout, wout, vout, entropyFunctions, 1, 1, 1);
+	}
+     }default:
       exit(1);
-    }
   }
-  return EXIT_SUCCESS;
+ }
+ return EXIT_SUCCESS;
 }

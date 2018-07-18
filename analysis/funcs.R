@@ -89,29 +89,32 @@ evolutionStats <- function(wdat){
        "K2upper"     = mu.K2)
 }
 
-
 #' Plot box counting dimension regression
 #'
 #' @param wout 
 #' @param generation
+#' @param drawPlot   boolean If true make plot, otherwise just calculate
 #'
-#' @return
+#' @return vector Dimension, p.value, r2
 #' @export
 #'
 #' @examples
-plotScalc <- function(wout, g = 0){
+plotScalc <- function(wout, g = 0, drawPlot = TRUE){
   # plot S for static structures (0 generations)
   N <- log(wout$S[wout$generation == g],base=10)
   w <- log(1/wout$window[wout$generation == g],base=10)
   Lfit <- goodFit(w,N,minXpoints = 4, r2 = 0.9)
-  plot(w,N,xlab="log2(1/w)", ylab="log2(N(S))",pch=19)
-  m <- min(w[Lfit$index])
-  M <- max(w[Lfit$index])
-  segments(m,m*Lfit$slope+Lfit$intercept,M,M*Lfit$slope+Lfit$intercept)
-  l <- sprintf("%2.2f",Lfit$slope)
-  p <- sprintf("%2.2e",Lfit$p.value)
-  r <- sprintf("%2.2e",Lfit$r2)
-  legend("topleft", paste("slope: ",l,", p. value: ",p,", r^2: ", r, sep=""))
+  if(drawPlot == TRUE){
+    plot(w,N,xlab="log2(1/w)", ylab="log2(N(S))",pch=19)
+    m <- min(w[Lfit$index])
+    M <- max(w[Lfit$index])
+    segments(m,m*Lfit$slope+Lfit$intercept,M,M*Lfit$slope+Lfit$intercept)
+    l <- sprintf("%2.2f",Lfit$slope)
+    p <- sprintf("%2.2e",Lfit$p.value)
+    r <- sprintf("%2.2e",Lfit$r2)
+    legend("topleft", paste("slope: ",l,", p. value: ",p,", r^2: ", r, sep=""))
+  }
+  c(Dimension = Lfit$slope, Pvalue = Lfit$p.value, r2 = Lfit$r2)
 }
 
 

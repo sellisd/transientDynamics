@@ -35,6 +35,13 @@ public:
   * @return    int    Value of cell i,j
   */
   int  get(int i, int j);
+  void fillRandom(randomv &r, double p);
+  /**
+  * Fill the grid with a linear density gradient
+  * @param[in] r  Instance of random number generator class
+  * @return       Nothing
+  */
+  void gradientLinear(randomv &r);
   //! Evolve the system by a single step.
   void tick();
   //! initialize system world
@@ -67,7 +74,16 @@ public:
   void printV(int t, ostream & vout);
   void makeGrid(vector<vector<int> > & grid);
   virtual void step(randomv &r);
-  virtual int randomState(); //! Return a random non-zero state of the cell
+  /**
+  * Generalized logistic function
+  * @param[in] L      The maximum value of the curve
+  * @param[in] k      The steepness of the curve
+  * @param[in] x0     The x-value of the midpoint
+  * @params[in] x     The value for which the function is computed
+  * @return           $$f(x) = \frac{L}{1 + e^{-k()x-x_0}}$$
+  */
+  double sigmoid(double L, double k, double x0, double x);
+
  private:
   int side;
   vector<vector<int> > grid; //! The world grid

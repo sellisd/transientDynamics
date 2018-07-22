@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <map>
-#include "gasFreeExpansion.h"
+#include "gasMixing.h"
 #include "randomv.h"
 #include "entropy.h"
 #include "system.h"
 
 using namespace std;
 
-void gasFreeExpansion::step(randomv &r){
+void gasMixing::step(randomv &r){
   bool success = false;
   while (success != true) {
     int x1 = r.sampleUniformInt(system::getSide());
@@ -39,7 +39,7 @@ void gasFreeExpansion::step(randomv &r){
   system::step(r);
 }
 
-int gasFreeExpansion::swap(int x1,int y1, int x2, int y2){
+int gasMixing::swap(int x1,int y1, int x2, int y2){
   int a = system::get(x1,y1);
   int b = system::get(x2,y2);
   if(a != b){

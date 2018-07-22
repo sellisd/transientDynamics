@@ -7,7 +7,7 @@
 #include "randomv.h"
 #include "system.h"
 #include "gameOfLife.h"
-#include "gasFreeExpansion.h"
+#include "gasMixing.h"
 #include "entropy.h"
 
 
@@ -20,7 +20,7 @@ command line parameters:
 side model replicates Tmax by
 
 Options
-1:     Gas free expansion
+1:     Gas mixing
 2:     Game of Life
 3:     Gradient
 4:     Uniform
@@ -64,10 +64,10 @@ vout.open (vfileS, std::ofstream::out);
 randomv r;
 for (int replicate = 0; replicate < replicates; replicate++){
   switch(model){
-    case 1:{        // Gas free expansion
-      gasFreeExpansion gasFreeExpansion(x);
-      gasFreeExpansion.fillSquare(r, squareSide, squareFillingProb);
-      gasFreeExpansion.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
+    case 1:{        // Gas mixing
+      gasMixing gasMixing(x);
+      gasMixing.fillSquare(r, squareSide, squareFillingProb);
+      gasMixing.run(replicate, Tmax, r, sout, wout, vout, entropyFunctions, byS, byW, byV);
       break;
     }
     case 2:{         // Game of Life

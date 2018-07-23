@@ -133,6 +133,7 @@ plotSTcalc <- function(wout){
   D <- vector()
   DSE <- vector()
   Dr2 <- vector()
+  pvalue <- vector()
   counter <- 1
   for(g in generations){
     N <- log(wout$S[wout$generation==g],base=10)
@@ -141,12 +142,14 @@ plotSTcalc <- function(wout){
     D[counter]   <- Lfit$slope
     DSE[counter] <- Lfit$se
     Dr2[counter] <- Lfit$r2
+    pvalue[counter] <- Lfit$p.value
     counter <- counter + 1
   }
   data.frame("generations" = generations,
              "D"          = D,
              "DSE"        = DSE,
-             "Dr2"        = Dr2)
+             "Dr2"        = Dr2,
+             "pvalue"     = pvalue)
 }
 
 

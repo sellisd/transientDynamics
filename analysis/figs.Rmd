@@ -13,78 +13,55 @@ output:
 Rscript -e 'library(rmarkdown); rmarkdown::render("figs.Rmd", "html_document")'
 -->
 
+```{r, setDataPaths}
+basePath <- "~/Dropbox/transientDynamics"
+analysisPath <- file.path(basePath, "analysis")
+dataPath <- file.path(basePath, "data")
+figsPath <- file.path(basePath, "ms/figs")
+```
+
 ```{r, loadLibraries}
 library(tidyverse)
 library(latex2exp)
 library(cowplot)
-source("~/Dropbox/transientDynamics/analysis/funcs.R")
+library(animation)
+source(file.path(analysisPath, "funcs.R"))
 theme_set(theme_classic())
 ```
 
 ```{r, loadData}
-gradientV <- read.table("~/Dropbox/transientDynamics/data/gradient.vector.dat", stringsAsFactors = FALSE)
-gradientS <- read_delim("~/Dropbox/transientDynamics/data/gradient.statistics.dat", delim = "\t")
-gradientW <- read.table("~/Dropbox/transientDynamics/data/gradient.window.dat", stringsAsFactors = FALSE, header = TRUE)
+gradientV <- read.table(file.path(dataPath, "gradient.vector.dat"), stringsAsFactors = FALSE)
+gradientS <- read_delim(file.path(dataPath, "gradient.statistics.dat"), delim = "\t")
+gradientW <- read.table(file.path(dataPath, "gradient.window.dat"), stringsAsFactors = FALSE, header = TRUE)
 
-uniformV <- read.table("~/Dropbox/transientDynamics/data/uniform.vector.dat", stringsAsFactors = FALSE)
-uniformS <- read_delim("~/Dropbox/transientDynamics/data/uniform.statistics.dat", delim = "\t")
-uniformW <- read.table("~/Dropbox/transientDynamics/data/uniform.window.dat", stringsAsFactors = FALSE, header = TRUE)
+uniformV <- read.table(file.path(dataPath, "uniform.vector.dat"), stringsAsFactors = FALSE)
+uniformS <- read_delim(file.path(dataPath, "uniform.statistics.dat"), delim = "\t")
+uniformW <- read.table(file.path(dataPath, "uniform.window.dat"), stringsAsFactors = FALSE, header = TRUE)
 
-gfeV<-read.table("~/Dropbox/transientDynamics/data/gfe.vector.dat", stringsAsFactors = FALSE)
-golV<-read.table("~/Dropbox/transientDynamics/data/gol.vector.dat", stringsAsFactors = FALSE)
+gmV<-read.table(file.path(dataPath, "gm.vector.dat"), stringsAsFactors = FALSE)
+golV<-read.table(file.path(dataPath, "gol.vector.dat"), stringsAsFactors = FALSE)
 
-gfeF <- read.table("~/Dropbox/transientDynamics/data/gfe100.window.dat", stringsAsFactors = FALSE, header = TRUE)
-golF<-read.table("~/Dropbox/transientDynamics/data/gol100.window.dat", stringsAsFactors = FALSE, header = TRUE)
+gmF <- read.table(file.path(dataPath, "gm100.window.dat"), stringsAsFactors = FALSE, header = TRUE)
+golF<-read.table(file.path(dataPath, "gol100.window.dat"), stringsAsFactors = FALSE, header = TRUE)
 
-gfeW <- read.table("~/Dropbox/transientDynamics/data/gfe.window.dat", stringsAsFactors = FALSE, header = TRUE)
-golW <- read.table("~/Dropbox/transientDynamics/data/gol.window.dat", stringsAsFactors = FALSE, header = TRUE)
+gmW <- read.table(file.path(dataPath, "gm.window.dat"), stringsAsFactors = FALSE, header = TRUE)
+golW <- read.table(file.path(dataPath, "gol.window.dat"), stringsAsFactors = FALSE, header = TRUE)
 
-gfeS <- read.table("~/Dropbox/transientDynamics/data/gfe.statistics.dat", stringsAsFactors = FALSE, header = TRUE)
-golS <- read.table("~/Dropbox/transientDynamics/data/gol.statistics.dat", stringsAsFactors = FALSE, header = TRUE)
+gmS <- read.table(file.path(dataPath, "gm.statistics.dat"), stringsAsFactors = FALSE, header = TRUE)
+golS <- read.table(file.path(dataPath, "gol.statistics.dat"), stringsAsFactors = FALSE, header = TRUE)
 
-gfesp <- read_tsv("~/Dropbox/transientDynamics/data/gfe100.statistics.dat")
-golsp <- read_tsv("~/Dropbox/transientDynamics/data/gol100.statistics.dat")
-
-```
-
-```{r, gradients}
-p1 <- (uniformW %>% 
-  bind_rows(gradientW) %>% 
-  filter(window == 1) %>% 
-  ggplot(aes(x = replicate, y = K)) + geom_bar(stat ='identity'))
-
-p2 <- (uniformW %>% 
-  bind_rows(gradientW) %>% 
-  filter(window == 1) %>% 
-  ggplot(aes(x = replicate, y = H)) + geom_bar(stat ='identity'))
-l <- 10
-drawPlots <- FALSE
-df <- data.frame(Dimension = numeric(l),
-                 Pvalue    = numeric(l),
-                 r2        = numeric(l))
-
-for(i in c(0:8)){
-  df[i+1,] <- plotScalc(uniformW[uniformW$replicate == i,], drawPlot = drawPlots)
-}
-df[10,] <- plotScalc(gradientW, drawPlot = drawPlots)
-df$Label <- c("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "gradient")
-p3 <- (df %>% 
-  ggplot(aes(x = Label, y = Dimension)) + geom_bar(stat = 'identity'))
-
-gradient <- plot_grid(p1, p2, p3, labels = c("A", "B", "C"), ncol = 1, align = "v")
-save_plot(png("../ms/figs/figureGradient.png",
-          gradient,
-          base_aspect_ratio = 1.7))
+gmsp <- read_tsv(file.path(dataPath, "gm100.statistics.dat"))
+golsp <- read_tsv(file.path(dataPath, "gol100.statistics.dat"))
 
 ```
 
 ```{r, transformData}
 # descriptive statistics
-gfe <- evolutionStats(gfeF)
+gm <- evolutionStats(gmF)
 gol <- evolutionStats(golF)
 
 # summary statistics by generation
-gfestats <- (group_by(gfesp, generation) %>%
+gmstats <- (group_by(gmsp, generation) %>%
   summarise(mtl = mean(Ktl, na.rm = TRUE), q1tl = quantile(Ktl, 0.25, na.rm = TRUE), q2tl = quantile(Ktl, 0.75, na.rm = TRUE), 
             mce = mean(Kce, na.rm = TRUE), q1ce = quantile(Kce, 0.25, na.rm = TRUE), q2ce = quantile(Kce, 0.75, na.rm = TRUE)))
 golstats <- (group_by(golsp, generation) %>%
@@ -92,37 +69,72 @@ golstats <- (group_by(golsp, generation) %>%
             mce = mean(Kce, na.rm = TRUE), q1ce = quantile(Kce, 0.25, na.rm = TRUE), q2ce = quantile(Kce, 0.75, na.rm = TRUE)))
 
 # statistics on coarse grained grid
-gfecgstats <- (gfeF %>% filter(window == 4) %>% group_by(replicate, generation, window) %>% 
+gmcgstats <- (gmF %>% filter(window == 4) %>% group_by(replicate, generation, window) %>% 
         summarize(K1mean = mean(K,na.rm. = TRUE), Hmean = mean(H, na.rm = TRUE)))
 golcgstats <- (golF %>% filter(window == 4) %>% group_by(replicate, generation, window) %>% 
         summarize(K1mean = mean(K,na.rm. = TRUE), Hmean = mean(H, na.rm = TRUE)))
 ```
 
-```{r, timeEvolution, fig.cap = "Figure 1", fig.width = 3, fig.height = 9}
-png("../ms/figs/figure1.png", width = 3, height = 9, units = "in", res = 300)
+```{r, TimeEvolutionGasMixing}
+png(file.path(figsPath, "TimeEvolutionGasMixing.png"), width = 3, height = 9, units = "in", res = 300)
 layout(matrix(c(1:3),ncol=1))
 par(mai=c(0.1,0.1,0.1,0.1))
 side <- 64
 
-maxDensity <- max(gfeV[,2:ncol(gfeV)]) #largest overlap of particles
-gc <- c("grey90",rev(grey.colors(maxDensity, start = 0, end = 0.5)))
 for(i in c(0, 100000, 1000000)){
-  plotState(gfeV, side = side, t = i, col = gc)
+  plotState(gmV, side = side, t = i, col = c("grey90",1))
 }
 dev.off()
 ```
 
-```{r, timeEvolutionS, fig.cap = "Figure S1", fig.width = 6, fig.height = 6}
-png("../ms/figs/figureS1.png", width = 6, height = 6, units = "in", res = 300)
-layout(matrix(c(1:6),ncol=2))
+
+```{r, ComplexityFluctuationsGasMixing}
+png(file.path(figsPath, "ComplexityFluctuationsGasMixing.png"))
+a <- filter(gmW, window == 1)
+b <- transmute(gmS,generation,  Kratio = Ktl/Kce)
+j <- left_join(a, b, by = "generation")
+df <- gather(j, "Measure", "Complexity", K, Kratio)
+ggplot(df, aes(x = generation, y = Complexity)) + geom_line() + facet_grid(Measure~.) + facet_grid(Measure ~ ., scales = "free_y") + geom_hline(data=data.frame(xint=1,Measure="Kratio"),aes(yintercept=xint),linetype="dotted")
+dev.off()
+```
+
+```{r, SubregionsGasMixing}
+png(file.path(figsPath, "SubregionsGasMixing.png"))
+gmstats %>% ggplot(aes(x = generation)) + geom_ribbon(aes(x = generation, ymin = q1tl, ymax = q2tl), fill = "grey70", alpha = 0.5)  +  geom_line(aes(y = mtl), color ="red") + geom_ribbon(aes(x = generation, ymin = q1ce, ymax = q2ce), fill = "grey70", alpha = 0.5) + geom_line(aes(y = mce), color = "blue") + labs(y = "Kolmogorov complexity")
+dev.off()
+```
+
+```{r, CoarseGrainedStatsGasMixingab}
+png(file.path(figsPath, "CoarseGrainedStatsGasMixingab.png"), width = 7, height = 5, units = "in", res = 300)
+
+df <- gather(gmcgstats, "Measure", "Statistic", K1mean, Hmean)
+df$Measure[df$Measure=="K1mean"] = "Kolmogorov Komplexity"
+df$Measure[df$Measure=="Hmean"] = "Information entropy"
+df %>%
+  group_by(generation, Measure) %>%
+  summarise(mean = mean(Statistic), sd = sd(Statistic)) %>% 
+  mutate(sdmin = mean-sd, sdmax = mean+sd) %>%
+  ggplot(aes(x = generation, y = mean)) + geom_ribbon(aes(ymin = sdmin, ymax = sdmax), fill = "grey70", alpha = 0.5) + geom_line() + facet_grid(Measure ~ ., scales = "free_y")
+dev.off()
+```
+
+```{r, CoarseGrainedStatsGasMixingc}
+png(file.path(figsPath, "CoarseGrainedStatsGasMixingc.png"), width = 7, height = 2.5, units = "in", res = 300)
+gmP <- plotSTcalc(gmF)
+par(las = 1, bty="u", mai = c(1.02, 0.82, 0, 0.42))
+plot(gmP$generations, gmP$D,type="l",log="",ylab="", xlab="time")
+points(gmP$generations, gmP$D + gmP$DSE,type="l",lty=3)
+points(gmP$generations, gmP$D - gmP$DSE,type="l",lty=3)
+mtext("S",side=2,line=3)
+mtext(expression(r^2),side=4,line=3)
+dev.off()
+```
+
+```{r, TimeEvolutionGameOfLife}
+png(file.path(figsPath,"TimeEvolutionGameOfLife.png"), width = 3, height = 9, units = "in", res = 300)
+layout(matrix(c(1:3),ncol=1))
 par(mai=c(0.1,0.1,0.1,0.1))
 side <- 64
-
-maxDensity <- max(gfeV[,2:ncol(gfeV)]) #largest overlap of particles
-gc <- c("grey90",rev(grey.colors(maxDensity, start = 0, end = 0.5)))
-for(i in c(0, 100000, 1000000)){
-  plotState(gfeV, side = side, t = i, col = gc)
-}
 
 for(i in c(0, 100, 500)){
   plotState(golV, side = side, t = i, col = c("grey90", 1))
@@ -130,23 +142,9 @@ for(i in c(0, 100, 500)){
 dev.off()
 ```
 
-```{r, complexityFluctuations, fig.cap = "Figure 2"}
-png("../ms/figs/figure2.png")
-#tidy up tables
-a <- filter(gfeW, window == 1)
-b <- transmute(gfeS, generation,  Kratio = Ktl/Kce)
-j <- left_join(a, b, by = "generation")
-df <- gather(j, "Measure", "Complexity", K, Kratio)
-ggplot(df, aes(x = generation, y = Complexity)) + geom_line() + facet_grid(Measure~.) + facet_grid(Measure ~ ., scales = "free_y") + geom_hline(data=data.frame(xint=1,Measure="Kratio"),aes(yintercept=xint),linetype="dotted")
-dev.off()
-df %>% mutate(nextRow = lag(Complexity),
-              DK = Complexity - nextRow
-              ) %>% 
-  ggplot(aes(x=generation, y = DK)) + geom_bar(stat = 'identity')
-```
 
-```{r, complexityFluctuationsSGol, fig.cap = "Figure S3"}
-png("../ms/figs/figureS3.png")
+```{r, ComplexityFluctuationsGameOfLife}
+png(file.path(figsPath, "ComplexityFluctuationsGameOfLife.png"))
 a <- filter(golW, window == 1)
 b <- transmute(golS,generation,  Kratio = Ktl/Kce)
 j <- left_join(a, b, by = "generation")
@@ -155,78 +153,16 @@ ggplot(df, aes(x = generation, y = Complexity)) + geom_line() + facet_grid(Measu
 dev.off()
 ```
 
-```{r, subregionsgfe, fig.cap = "Figure 3"}
-png("../ms/figs/figure3.png")
-gfestats %>% ggplot(aes(x = generation)) + geom_ribbon(aes(x = generation, ymin = q1tl, ymax = q2tl), fill = "grey70", alpha = 0.5)  +  geom_line(aes(y = mtl), color ="red") + geom_ribbon(aes(x = generation, ymin = q1ce, ymax = q2ce), fill = "grey70", alpha = 0.5) + geom_line(aes(y = mce), color = "blue") + labs(y = "Kolmogorov complexity")
-dev.off()
-```
 
-```{r, subregionstransientDynamics, fig.cap = "Figure S5"}
-png("../ms/figs/figureS5.png")
+```{r, SubregionsGameOfLife}
+png(file.path(figsPath, "SubregionsGameOfLife.png"))
 golstats %>% ggplot(aes(x = generation)) + geom_ribbon(aes(x = generation, ymin = q1tl, ymax = q2tl), fill = "grey70", alpha = 0.5)  +  geom_line(aes(y = mtl), color ="red") + geom_ribbon(aes(x = generation, ymin = q1ce, ymax = q2ce), fill = "grey70", alpha = 0.5) + geom_line(aes(y = mce), color = "blue") + labs(y = "Kolmogorov complexity")
 dev.off()
 ```
 
-```{r, coarseGrainedStatsGFEab, fig.cap = "Figure 4ab"}
-png("../ms/figs/figure4ab.png", width = 7, height = 5, units = "in", res = 300)
 
-df <- gather(gfecgstats, "Measure", "Statistic", K1mean, Hmean)
-df$Measure[df$Measure=="K1mean"] = "Kolmogorov Komplexity"
-df$Measure[df$Measure=="Hmean"] = "Information entropy"
-df %>%
-  group_by(generation, Measure) %>% summarise(mean = mean(Statistic), sd = sd(Statistic)) %>% 
-  mutate(sdmin = mean-sd, sdmax = mean+sd) %>% ggplot(aes(x = generation, y = mean)) + geom_ribbon(aes(ymin = sdmin, ymax = sdmax), fill = "grey70", alpha = 0.5) + geom_line() + facet_grid(Measure ~ ., scales = "free_y")
-dev.off()
-```
-
-```{r, coarseGrainedStatsGFEc, fig.cap = "Figure4c"}
-png("../ms/figs/figure4c.png", width = 7, height = 2.5, units = "in", res = 300)
-
-gfeP <- plotSTcalc(gfeF)
-par(las = 1, bty="u", mai = c(1.02, 0.82, 0, 0.42))
-plot(gfeP$generations, gfeP$D,type="l",log="",ylab="", xlab="time")
-points(gfeP$generations, gfeP$D + gfeP$DSE,type="l",lty=3)
-points(gfeP$generations, gfeP$D - gfeP$DSE,type="l",lty=3)
-par(new=TRUE)
-plot(gfeP$generations, gfeP$Dr2,type="l",axes=FALSE,log="",xlab="",ylab="",col="red")
-axis(4,ylim=c(0,99,1),col="red")
-mtext("S",side=2,line=3)
-mtext(expression(r^2),side=4,line=3)
-par(new=FALSE)
-dev.off()
-```
-
-```{r, coarseGrainedStatsGOLab, fig.cap = "Figure S6ab"}
-png("../ms/figs/figureS6ab.png", width = 7, height = 5, units = "in", res = 300)
-
-df <- gather(golcgstats, "Measure", "Statistic", K1mean, Hmean)
-df$Measure[df$Measure=="K1mean"] = "Kolmogorov Komplexity"
-df$Measure[df$Measure=="Hmean"] = "Information entropy"
-df %>%
-  group_by(generation, Measure) %>% summarise(mean = mean(Statistic), sd = sd(Statistic)) %>% 
-  mutate(sdmin = mean-sd, sdmax = mean+sd) %>% ggplot(aes(x = generation, y = mean)) + geom_ribbon(aes(ymin = sdmin, ymax = sdmax), fill = "grey70", alpha = 0.5) + geom_line() + facet_grid(Measure ~ ., scales = "free_y")
-dev.off()
-```
-
-```{r, coarseGrainedStatsGOLc, fig.cap = "Figure S6c"}
-png("../ms/figs/figureS6c.png", width = 7, height = 2.5, units = "in", res = 300)
-par(las = 1, bty="u", mai = c(1.02, 0.82, 0, 0.42))
-golP <- plotSTcalc(golF)
-par(bty="u")
-plot(golP$generations, golP$D,type="l",log="",ylab="", xlab="time")
-points(golP$generations, golP$D+golP$DSE,type="l",lty=3)
-points(golP$generations, golP$D-golP$DSE,type="l",lty=3)
-par(new=TRUE)
-plot(golP$generations, golP$Dr2,type="l",axes=FALSE,log="",xlab="",ylab="",col="red")
-axis(4,ylim=c(0,99,1),col="red")
-mtext("S",side=2,line=3)
-mtext(expression(r^2),side=4,line=3)
-par(new=FALSE)
-dev.off()
-```
-
-```{r, coarseGrainedStatstransientDynamicsab, fig.cap = "Figure 5ab"}
-png("../ms/figs/figure5ab.png", width = 7, height = 5, units = "in", res = 300)
+```{r, CoarseGrainedStatsGameOfLifeab}
+png(file.path(figsPath, "CoarseGrainedStatsGameOfLifeab.png"), width = 7, height = 5, units = "in", res = 300)
 
 df <- (golcgstats %>% 
        filter(generation <= 50) %>% 
@@ -239,24 +175,91 @@ df %>%
 dev.off()
 ```
 
-```{r, coarseGrainedStatsGolc, fig.cap = "Figure5c"}
+```{r, CoarseGrainedStatsGameOfLifec}
 golP <- plotSTcalc(golF)
-png("../ms/figs/figure5c.png", width = 7, height = 2.5, units = "in", res = 300)
+png(file.path(figsPath, "CoarseGrainedStatsGameOfLifec.png"), width = 7, height = 2.5, units = "in", res = 300)
 par(las = 1, bty="u", mai = c(1.02, 0.82, 0, 0.42))
 plot(golP$generations, golP$D,type="l",log="",ylab="", xlab="time", xlim = c(0,50))
 points(golP$generations, golP$D + golP$DSE, type="l", lty=3)
 points(golP$generations, golP$D - golP$DSE, type="l", lty=3)
-par(new=TRUE)
-plot(golP$generations, golP$Dr2, type="l", axes = FALSE, log = "", xlab = "", ylab = "", col = "red")
-axis(4,ylim=c(0,99,1),col="red")
-mtext("S",side=2,line=3)
-mtext(expression(r^2),side=4,line=3)
-par(new=FALSE)
 dev.off()
 ```
 
+
+```{r, Gradients}
+png(file.path(figsPath, "Gradients.png"), width = 3.6, height = 6, units = "in", res = 300)
+l <- 10
+drawPlots <- FALSE
+df <- data.frame(Dimension = numeric(l),
+                 Pvalue    = numeric(l),
+                 r2        = numeric(l))
+
+df[1,] <- plotScalc(gradientW, drawPlot = drawPlots)
+for(i in c(0:8)){
+  df[i+2,] <- plotScalc(uniformW[uniformW$replicate == i,], drawPlot = drawPlots)
+}
+df$Label <- c("10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%", "gradient")
+
+gradientW %>%
+  bind_rows(uniformW) %>% 
+  filter(window == 1) %>% 
+  select(K, H) %>% 
+  mutate(Dimension = df$Dimension) %>% 
+  mutate(Label = c("gradient", "10%", "20%", "30%", "40%", "50%", "60%", "70%", "80%", "90%")) %>% 
+  gather(Measure,Value, -Label) %>% 
+  ggplot(aes(x = Label, y = Value)) + geom_bar(stat = 'identity')+ facet_wrap(~Measure, ncol = 1, scales = "free_y")
+dev.off()
+```
+
+
+```{r, GasMixingAnimation}
+library(animation)
+layout(matrix(c(1:6),ncol=2))
+par(mai=c(0.1,0.1,0.1,0.1))
+side <- 64
+generations <- unique(gmV[,1])
+sampledGenerations <- seq(from = 1, to = length(generations), by = 5)
+
+saveGIF({
+for(i in generations[sampledGenerations]){
+  plotState(gmV, side = side, t = i, col = c(0,1), main = i)
+}
+},movie.name = file.path(figsPath, "GasMixingAnimation.gif"), interval = 0.05)
+
+
+saveVideo({
+  ani.options(interval = 0.1)
+  for(i in generations){
+    plotState(gmV, side = side, t = i, col = c(0,1), main = i)
+  }
+}, video.name = file.path(figsPath, "GasMixingAnimation.mp4"), other.opts = "-pix_fmt yuv420p -b 300k")
+```
+
+
+```{r, GameOfLifeAnimation}
+layout(matrix(c(1:6),ncol=2))
+par(mai=c(0.1,0.1,0.1,0.1))
+side <- 64
+generations <- unique(golV[,1])
+sampledGenerations <- seq(from = 1, to = length(generations), by = 5)
+
+saveGIF({
+for(i in generations){
+  plotState(golV, side = side, t = i, col = c(0,1), main = i)
+}
+},movie.name = file.path(figsPath, "GameOfLifeAnimation.gif"), interval = 0.1)
+
+
+saveVideo({
+  ani.options(interval = 0.1)
+  for(i in generations){
+    plotState(golV, side = side, t = i, col = c(0,1), main = i)
+  }
+}, video.name = file.path(figsPath, "GasMixingAnimation.mp4"), other.opts = "-pix_fmt yuv420p -b 300k")
+```
+
+
 ```{bash}
-convert -append ../ms/figs/figure4ab.png ../ms/figs/figure4c.png ../ms/figs/figure4.png
-convert -append ../ms/figs/figure5ab.png ../ms/figs/figure5c.png ../ms/figs/figure5.png
-convert -append ../ms/figs/figureS6ab.png ../ms/figs/figureS6c.png ../ms/figs/figureS6.png
+convert -append ../ms/figs/CoarseGrainedStatsGameOfLifeab.png ../ms/figs/CoarseGrainedStatsGameOfLifec.png ../ms/figs/CoarseGrainedStatsGameOfLife.png
+convert -append ../ms/figs/CoarseGrainedStatsGasMixingab.png ../ms/figs/CoarseGrainedStatsGasMixingc.png ../ms/figs/CoarseGrainedStatsGasMixing.png
 ```

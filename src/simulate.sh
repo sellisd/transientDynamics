@@ -10,6 +10,9 @@
 ./run 64 1 1 1000000 10000 10000 1000 ../data/gm.statistics.dat ../data/gm.window.dat ../data/gm.vector.dat
 # Game of Life
 ./run 64 2 1 500 1 1 10 ../data/gol.statistics.dat ../data/gol.window.dat ../data/gol.vector.dat
+# Game of Life for animation
+./run 64 2 1 500 1 1 1 ../data/gol.anim.statistics.dat ../data/gol.anim.window.dat ../data/gol.anim.vector.dat
+
 
 
 #1000 replicates:

@@ -40,6 +40,7 @@ uniformW <- read.table(file.path(dataPath, "uniform.window.dat"), stringsAsFacto
 
 gmV<-read.table(file.path(dataPath, "gm.vector.dat"), stringsAsFactors = FALSE)
 golV<-read.table(file.path(dataPath, "gol.vector.dat"), stringsAsFactors = FALSE)
+golanimV<-read.table(file.path(dataPath, "gol.anim.vector.dat"), stringsAsFactors = FALSE)
 
 gmF <- read.table(file.path(dataPath, "gm100.window.dat"), stringsAsFactors = FALSE, header = TRUE)
 golF<-read.table(file.path(dataPath, "gol100.window.dat"), stringsAsFactors = FALSE, header = TRUE)
@@ -240,12 +241,12 @@ saveVideo({
 layout(matrix(c(1:6),ncol=2))
 par(mai=c(0.1,0.1,0.1,0.1))
 side <- 64
-generations <- unique(golV[,1])
+generations <- unique(golanimV[,1])
 sampledGenerations <- seq(from = 1, to = length(generations), by = 5)
 
 saveGIF({
 for(i in generations){
-  plotState(golV, side = side, t = i, col = c(0,1), main = i)
+  plotState(golanimV, side = side, t = i, col = c(0,1), main = i)
 }
 },movie.name = file.path(figsPath, "GameOfLifeAnimation.gif"), interval = 0.1)
 
@@ -253,9 +254,9 @@ for(i in generations){
 saveVideo({
   ani.options(interval = 0.1)
   for(i in generations){
-    plotState(golV, side = side, t = i, col = c(0,1), main = i)
+    plotState(golanimV, side = side, t = i, col = c(0,1), main = i)
   }
-}, video.name = file.path(figsPath, "GasMixingAnimation.mp4"), other.opts = "-pix_fmt yuv420p -b 300k")
+}, video.name = file.path(figsPath, "GameOfLifeAnimation.mp4"), other.opts = "-pix_fmt yuv420p -b 300k")
 ```
 
 

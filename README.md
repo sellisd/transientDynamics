@@ -9,7 +9,8 @@
 
 <hr>
 
-Source code for simulations and analysis described in Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [osf.io/bkz52](osf.io/bkz52)
+Source code for simulations and analysis described in:
+- Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [osf.io/bkz52](osf.io/bkz52)
 
 ## Requirements
 

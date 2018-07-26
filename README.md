@@ -57,3 +57,39 @@ vectorFile      string    Path and filename for vector output file. This file
                           contains world matrix concatenated to a vector for
                           each cycle
 ```
+
+### Output file format
+
+#### Statistics output file
+
+The statistics output file is a tab separated file that has information for each cycle (one cycle per row)
+with the following columns:
+
+|Name      | Description                    |
+|----------|--------------------------------|
+|replicate | Number of replicate simulation |
+|generation| Cycle number                   |
+|Ktl       |                                |
+|Kce       |                                |
+|Kbr       |                                |
+|Htl       |                                |
+|Hce       |                                |
+|Hbr       |                                |
+|Dtl       |                                |
+|Dce       |                                |
+|Dbr       |                                |
+
+#### Window output file
+The window file is a tab delimited file that contains the output for each coarse graining window size
+
+|Name      | Description                    |
+|----------|--------------------------------|
+|replicate | Number of replicate simulation |
+|generation| Cycle number                   |
+|window    |                                |
+|K         |                                |
+|H         |                                |
+|S         |                                |
+
+#### Vector output file
+The vector output file contains has in each row the cycle number and the world matrix concatenated into a vector (space delimited)

@@ -1,16 +1,16 @@
 # Transient dynamics in non-equilibrium complex systems
 
-Source code for simulations and analysis described in Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from ![osf.io/bkz52](osf.io/bkz52)
+Source code for simulations and analysis described in Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [osf.io/bkz52](osf.io/bkz52)
 
 ## Requirements
 
 ### transientDynamics simulator
 - a C++ compiler such one of the following:
-  - g++ GNU Compiler Collection ![https://gcc.gnu.org/](https://gcc.gnu.org/) or
-  - clang ![https://clang.llvm.org/](https://clang.llvm.org/)
+  - g++ GNU Compiler Collection [https://gcc.gnu.org/](https://gcc.gnu.org/) or
+  - clang [https://clang.llvm.org/](https://clang.llvm.org/)
 
 ### Analysis of results
-- R ![https://www.r-project.org/](https://www.r-project.org/)
+- R [https://www.r-project.org/](https://www.r-project.org/)
 
 ### Running a simulations
 

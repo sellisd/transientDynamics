@@ -1,7 +1,13 @@
 # Transient dynamics in non-equilibrium complex systems
 
-![Gas Mixing Model](ms/figs/GasMixingAnimation.gif)
-![Game Of Life](ms/figs/GameOfLifeAnimation.gif)
+
+<center>
+  
+|Gas Mixing Model | Game Of Life |
+|-----------------|--------------|
+| <img src="ms/figs/GasMixingAnimation.gif" width="100" height="100" /> | <img src="ms/figs/GameOfLifeAnimation.gif" width="100" height="100" />
+
+<hr>
 
 Source code for simulations and analysis described in Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [osf.io/bkz52](osf.io/bkz52)
 

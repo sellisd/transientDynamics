@@ -2,7 +2,7 @@
 
 
 <center>
-  
+
 |Gas Mixing Model | Game Of Life |
 |-----------------|--------------|
 | <img src="ms/figs/GasMixingAnimation.gif" width="100" height="100" /> | <img src="ms/figs/GameOfLifeAnimation.gif" width="100" height="100" />
@@ -75,19 +75,19 @@ vectorFile      string    Path and filename for vector output file. This file
 The statistics output file is a tab separated file that has information for each cycle (one cycle per row)
 with the following columns:
 
-|Name      | Description                    |
-|----------|--------------------------------|
-|replicate | Number of replicate simulation |
-|generation| Cycle number                   |
-|Ktl       |                                |
-|Kce       |                                |
-|Kbr       |                                |
-|Htl       |                                |
-|Hce       |                                |
-|Hbr       |                                |
-|Dtl       |                                |
-|Dce       |                                |
-|Dbr       |                                |
+|Name      | Description                                                      |
+|----------|------------------------------------------------------------------|
+|replicate | Number of replicate simulation                                   |
+|generation| Cycle number                                                     |
+|Ktl       | Kolmogorov complexity of the top-left subregion of the system    |
+|Kce       | Kolmogorov complexity of center subregion of the system          |
+|Kbr       | Kolmogorov complexity of bottom-right subregion of the system    |
+|Htl       | Information entropy of the top-left sybregion of the system      |
+|Hce       | Information entropy of the center subregion of the system        |
+|Hbr       | Information entropy of the bottom-right subregion of the system  |
+|Dtl       | Density of the top-left subregion of the system                  |
+|Dce       | Density of the center subregion of the system                    |
+|Dbr       | Density of the bottom-right subregion of the system              |
 
 #### Window output file
 The window file is a tab delimited file that contains the output for each coarse graining window size
@@ -96,10 +96,10 @@ The window file is a tab delimited file that contains the output for each coarse
 |----------|--------------------------------|
 |replicate | Number of replicate simulation |
 |generation| Cycle number                   |
-|window    |                                |
-|K         |                                |
-|H         |                                |
-|S         |                                |
+|window    | Size of coarse graining window |
+|K         | Kolmogorov complexity          |
+|H         | Information entropy            |
+|S         | Box counting dimension         |
 
 #### Vector output file
 The vector output file contains has in each row the cycle number and the world matrix concatenated into a vector (space delimited)

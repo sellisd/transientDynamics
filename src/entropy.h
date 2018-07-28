@@ -22,6 +22,7 @@ class entropy{
   //! Calculate information entropy.
   /**
   * Calculates the information entropy from a map of symbol frequencies.
+  * \f$H = -\sum_{k=1}^{p}\hat{\theta_k} log_2(\hat{\theta_k})\f$
   * @param[in]  hist     Map of integer to double
   * @return              Information entropy in bits (log2)
   */
@@ -73,7 +74,7 @@ class entropy{
   //! Statistics on coarse grained grid.
   /**
   * Coarse grain the system's grid at different scales with non-overlapping
-  * windows of size w = 1^i, with i \in (1, 2, 3, 4, 5, 6) and for each window
+  * windows of size \f$w = 1^i\f$, with \f$i \in (1, 2, 3, 4, 5, 6)\f$ and for each window
   * size calculate statistics.
   * @param[in]  grid             Grid of the system.
   * @param[out] cgStats          Statistics for each coarse graining window size.

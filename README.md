@@ -8,12 +8,13 @@
 | <img src="ms/figs/GasMixingAnimation.gif" alt="Gas mixing animation" onerror="this.onerror=null;this.src='../../ms/figs/GasMixingAnimation.gif';" width="100" height="100" /> | <img src="ms/figs/GameOfLifeAnimation.gif" alt="Gama of life animation" onerror="this.onerror=null;this.src='../../ms/figs/GameOfLifeAnimation.gif';" width="100" height="100" />  |
 </center>
 
-
-
 <hr>
 
-Source code for simulations and analysis described in:
-- Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [https://osf.io/bkz52/](https://osf.io/bkz52/)
+Simulation and analysis of transient dynamics in complex systems.
+
+Code on github: https://github.com/sellisd/transientDynamics
+
+preprint at OSF: Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [https://osf.io/bkz52/](https://osf.io/bkz52/)
 
 ## Requirements
 

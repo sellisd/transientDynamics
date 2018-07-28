@@ -79,8 +79,8 @@ public:
   * @param[in] L      The maximum value of the curve
   * @param[in] k      The steepness of the curve
   * @param[in] x0     The x-value of the midpoint
-  * @params[in] x     The value for which the function is computed
-  * @return           $$f(x) = \frac{L}{1 + e^{-k()x-x_0}}$$
+  * @param[in] x     The value for which the function is computed
+  * @return           \f$f(x) = \frac{L}{1 + e^{-k()x-x_0}}\f$
   */
   double sigmoid(double L, double k, double x0, double x);
 

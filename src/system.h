@@ -35,6 +35,11 @@ public:
   * @return    int    Value of cell i,j
   */
   int  get(int i, int j);
+  /** Fill cells in central cell of grid with probability p
+  * @param[in] r  Reference to random class generator
+  * @param     p  Probability of filling cell with value of 1
+  * @return    Nothing
+  **/
   void fillRandom(randomv &r, double p);
   /**
   * Fill the grid with a linear density gradient
@@ -54,7 +59,7 @@ public:
   * @param[in]  p       Probability of filling each cell within subregion.
   * @return                      Nothing
   */
-  void fillSquare(randomv &r, int a, double p);
+  void fillSquare(randomv &r, int window, double p);
   //! Run the simulation.
   /**
   * Performs a simulation run and calculates relevant statistics.
@@ -71,8 +76,14 @@ public:
   * @return                      Nothing
   */
   void run(int replicateID, int Tmax, randomv & r, ostream & sout, ostream & wout, ostream & vout, entropy & entropyFunctions, int byS, int byW, int byV);
+  /**
+  * Print state vector of system at cycle t
+  * @param[in] t      The cycle t
+  * @param[in] vout   Output stream
+  * @return           Nothing
+  */
   void printV(int t, ostream & vout);
-  void makeGrid(vector<vector<int> > & grid);
+  //! Evolve the system by a single step.
   virtual void step(randomv &r);
   /**
   * Generalized logistic function

@@ -7,6 +7,7 @@
 #include "system.h"
 
 using namespace std;
+
 int gameOfLife::sumN(int i, int j){
   int sumR = 0;
   for(int si = i - 1; si <= i + 1; si++){

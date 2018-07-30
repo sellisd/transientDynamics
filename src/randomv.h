@@ -18,10 +18,13 @@ class randomv{
   double sampleExponential(double mu);            //! sample from an exponential distribution with mean mu
   double sampleGamma(double alpha, double beta);  //! sample from a gamma distribution with parameters alpha and beta
   void sampleMultinomial(size_t K, unsigned int N, const double p[], unsigned int n[]); //sample from a multinomial distribution
-  double samplePareto(double alpha, double beta); //! sample from a pareto distribution with parameters alpha and beta \f$p(x) dx = (a/b) / (x/b)^{a+1} dx\f$
-
+  //! sample from a pareto distribution with parameters alpha and beta \f$p(x) dx = (a/b) / (x/b)^{a+1} dx\f$
+  double samplePareto(double alpha, double beta);
+  //! sample from Poisson distribution
   double samplePoisson(double lambda);
+  //! sample random directional vector
   void sampleDirVector(int dimensions, size_t n, double * x);
+  //! sample from multinomial function
   int sampleMyMultinomial(int NumOfGenotypes,unsigned int N, const double p[],unsigned int newGenerationp[]);
  private:
   const gsl_rng_type *Gt;

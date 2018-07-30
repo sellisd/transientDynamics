@@ -10,7 +10,6 @@ class entropy{
   entropy(void); //! Default constructor
   entropy(int x, int y); //! Constructor with size of grid
   double log2(double x); //! Base 2 logarithm
-  void   hist(map<int,double> &, vector<int> & vectorS);
   //! Calculate histogram of symbols.
   /**
   * Calculates the frequency of symbols in a vector of integers.
@@ -18,7 +17,7 @@ class entropy{
   * @param[in]  vectorS  Symbol vector
   * @return              Nothing
   */
-  double infEntropy(map<int,double> & hist);
+  void   hist(map<int,double> &, vector<int> & vectorS);
   //! Calculate information entropy.
   /**
   * Calculates the information entropy from a map of symbol frequencies.
@@ -26,7 +25,7 @@ class entropy{
   * @param[in]  hist     Map of integer to double
   * @return              Information entropy in bits (log2)
   */
-  void   coarseGrain(vector<int> & coarseGrained, int window, vector<vector<int> > & grid);
+  double infEntropy(map<int,double> & hist);
   //! Coarse grain grid by summation.
   /**
   * Non overlapping windows of side window are used to cover the whole grid and
@@ -37,7 +36,7 @@ class entropy{
   * @param[in]  grid            Grid of system.
   * @return                     Nothing.
   */
-  void   extractSubGrid(vector<vector<int> > & grid, vector<int> & subgrid, int width, int x, int y);
+  void   coarseGrain(vector<int> & coarseGrained, int window, vector<vector<int> > & grid);
   //! Extract a square region of the grid.
   /**
   * Extracts a square region of the grid and returns it
@@ -49,7 +48,7 @@ class entropy{
   * @param      y        Column index of top-left corner of subgrid
   * @return              Nothing
   */
-  void statistics(vector<int> & subGrid, int subGridSide, vector<double> &results);
+  void   extractSubGrid(vector<vector<int> > & grid, vector<int> & subgrid, int width, int x, int y);
   //! Calculate statistics on a subgrid vector.
   /**
   * Calculates the Kolmogorov complexity, the information entropy and the density
@@ -59,7 +58,7 @@ class entropy{
   * @param[out] results      Vector with results [K, H, D]
   * @return                  Nothing.
   */
-  void subGridStats(vector<vector<int> > &grid, vector<double> & topleftStats, vector<double> & centerStats, vector<double> & bottomrightStats);
+  void statistics(vector<int> & subGrid, int subGridSide, vector<double> &results);
   //! Statistics of three subgrids.
   /**
   * Calculate statistics at three square subgrids with side 8, the top left
@@ -70,7 +69,7 @@ class entropy{
   * @param[out] bottomrightStats Statistics for bottom right subgrid
   * @return              Nothing
   */
-  void coarseGrainedStats(vector<vector<int> > &grid, map<int, vector<double> > & cgStats);
+  void subGridStats(vector<vector<int> > &grid, vector<double> & topleftStats, vector<double> & centerStats, vector<double> & bottomrightStats);
   //! Statistics on coarse grained grid.
   /**
   * Coarse grain the system's grid at different scales with non-overlapping
@@ -80,37 +79,38 @@ class entropy{
   * @param[out] cgStats          Statistics for each coarse graining window size.
   * @return              Nothing
   */
-  double density(vector<int> & subgrid);
+  void coarseGrainedStats(vector<vector<int> > &grid, map<int, vector<double> > & cgStats);
   //! Calculate the density of a subgrid.
   /**
   * Calculates the ratio of occupied cells to total cells.
   * @param[in]  subgrid  The subgrid vector.
   * @return              The density of the region
   */
-  double compress(vector<int> & vectorS);
+  double density(vector<int> & subgrid);
   //! Perform run length encoding compression.
   /**
   * Compress vector with a run length encoding list, e.g.: 000111002 -> 03130221.
   * @param[in] vectorS  Vector to compress
   * @return             Size of compressed vector.
   */
-  double compressPNG(vector<int> & vectorS, unsigned int window);
+  double compress(vector<int> & vectorS);
   //! Perform PNG compression on a std vector representing a square matrix.
   /**
   * Uses lodepng to perform a PNG compression to a std vector which
   * represents a square matrix.
   * @param[in] vectorS  Vector to compress
-  * @param[in] width    Dide of the square matrix
+  * @param[in] window   Side of the square matrix
   * @return             Nothing
   */
-  int    boxCount(vector<int> & vectorS);
+  double compressPNG(vector<int> & vectorS, unsigned int window);
   //! Calculate the box-counting dimension of a coarse grained vector.
   /**
   * Calculate box counting dimension (Minkowski-Bouligand). As the input is
   * already coarse grained we just have to calculate the sum of entries > 0
-  * @param[in] coarseGrained Coarse grained vector.
+  * @param[in] vectorS Coarse grained vector.
   * @returns   int           Box counting dimension
   */
+  int    boxCount(vector<int> & vectorS);
  private:
   int x;
   int y;

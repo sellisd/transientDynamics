@@ -17,13 +17,11 @@ using namespace std;
 
 class gasMixing : public system{
   public:
-    //! Default constructor
-    gasMixing(void);
-    //! Constructor with side of world
-    gasMixing(int side){};
+    gasMixing(void); //! Default constructor
+    gasMixing(int side){}; //! Constructor with side of world
     /**
     * One time step (generation), extends the base class step.
-    * @param[in] randomv   Random number generation class.
+    * @param[in] r   Random number generation class.
     * @return              Nothing
     */
     void step(randomv &r);

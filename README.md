@@ -12,8 +12,8 @@
 
 Simulation and analysis of transient dynamics in complex systems.
 
-- preprint: Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [https://osf.io/bkz52/](https://osf.io/bkz52/)
-- Code: https://github.com/sellisd/transientDynamics
+- Preprint: Sellis, D. (2018, July 26). Transient dynamics in non-equilibrium complex systems. Retrieved from [https://osf.io/bkz52/](https://osf.io/bkz52/)
+- Code: https://github.com/sellisd/transientDynamics/
 - Documentation: https://sellisd.github.io/transientDynamics/
 
 ## Requirements

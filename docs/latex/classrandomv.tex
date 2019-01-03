@@ -1,0 +1,139 @@
+\hypertarget{classrandomv}{}\section{randomv Class Reference}
+\label{classrandomv}\index{randomv@{randomv}}
+
+
+random variable class  
+
+
+
+
+{\ttfamily \#include $<$randomv.\+h$>$}
+
+
+
+Collaboration diagram for randomv\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{classrandomv__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classrandomv_a32fc231d0bfb6a97c09d60fab19ed5fb}\label{classrandomv_a32fc231d0bfb6a97c09d60fab19ed5fb}} 
+\hyperlink{classrandomv_a32fc231d0bfb6a97c09d60fab19ed5fb}{randomv} (void)
+\begin{DoxyCompactList}\small\item\em constructor \end{DoxyCompactList}\item 
+\hyperlink{classrandomv_a82d37b6df4f44746c5858578c265cd96}{randomv} (unsigned long seed)
+\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+double \hyperlink{classrandomv_a0d1def37be5addf36b11234e3a7b29d3}{sample\+Uniform} (void)
+\begin{DoxyCompactList}\small\item\em constructor with seed \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_a786b0ee6f4f4f4899326370a3112d4d8}\label{classrandomv_a786b0ee6f4f4f4899326370a3112d4d8}} 
+int \hyperlink{classrandomv_a786b0ee6f4f4f4899326370a3112d4d8}{sample\+Uniform\+Int} (int n)
+\begin{DoxyCompactList}\small\item\em sample from the uniform distribution $[0,1)$ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_a7902b7016b5f9fb0b594e8575f8bf02a}\label{classrandomv_a7902b7016b5f9fb0b594e8575f8bf02a}} 
+unsigned int \hyperlink{classrandomv_a7902b7016b5f9fb0b594e8575f8bf02a}{sample\+Binomial} (double p, int N)
+\begin{DoxyCompactList}\small\item\em sample from the uniform distribution $[0,n-1)$ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_aa8c9c4b22b274a3cc1d4d05f99a88f50}\label{classrandomv_aa8c9c4b22b274a3cc1d4d05f99a88f50}} 
+double \hyperlink{classrandomv_aa8c9c4b22b274a3cc1d4d05f99a88f50}{sample\+Normal} (double mu, double sigma)
+\begin{DoxyCompactList}\small\item\em sample from the binomial distribution \end{DoxyCompactList}\item 
+double \hyperlink{classrandomv_a574eadd80c9cc66756c3417e55f2655c}{sample\+Normal} (double sigma)
+\begin{DoxyCompactList}\small\item\em sample from a normal distribution with mean mu and standard deviation sigma \end{DoxyCompactList}\item 
+double \hyperlink{classrandomv_afa56a12aa1bb44d7d4bd2a84303d9dca}{sample\+Exponential} (double mu)
+\begin{DoxyCompactList}\small\item\em sample from a normal distribution with mean 0 and standard deviation sigma \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_a138a18fe2b991c0328510a7e077ca6a8}\label{classrandomv_a138a18fe2b991c0328510a7e077ca6a8}} 
+double \hyperlink{classrandomv_a138a18fe2b991c0328510a7e077ca6a8}{sample\+Gamma} (double alpha, double beta)
+\begin{DoxyCompactList}\small\item\em sample from an exponential distribution with mean mu \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_ab840593c1344749631c73321f589370f}\label{classrandomv_ab840593c1344749631c73321f589370f}} 
+void \hyperlink{classrandomv_ab840593c1344749631c73321f589370f}{sample\+Multinomial} (size\+\_\+t K, unsigned int N, const double p\mbox{[}$\,$\mbox{]}, unsigned int n\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em sample from a gamma distribution with parameters alpha and beta \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_a8973843ea2a27dc967333c712b89e788}\label{classrandomv_a8973843ea2a27dc967333c712b89e788}} 
+double \hyperlink{classrandomv_a8973843ea2a27dc967333c712b89e788}{sample\+Pareto} (double alpha, double beta)
+\begin{DoxyCompactList}\small\item\em sample from a pareto distribution with parameters alpha and beta $p(x) dx = (a/b) / (x/b)^{a+1} dx$ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_a53890cf6d45e02337dbd348297f2901f}\label{classrandomv_a53890cf6d45e02337dbd348297f2901f}} 
+double \hyperlink{classrandomv_a53890cf6d45e02337dbd348297f2901f}{sample\+Poisson} (double lambda)
+\begin{DoxyCompactList}\small\item\em sample from Poisson distribution \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_a8739e952003183c95986dd2873058735}\label{classrandomv_a8739e952003183c95986dd2873058735}} 
+void \hyperlink{classrandomv_a8739e952003183c95986dd2873058735}{sample\+Dir\+Vector} (int dimensions, size\+\_\+t n, double $\ast$x)
+\begin{DoxyCompactList}\small\item\em sample random directional vector \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classrandomv_ad9386cb5a1f8413515add301e707387f}\label{classrandomv_ad9386cb5a1f8413515add301e707387f}} 
+int \hyperlink{classrandomv_ad9386cb5a1f8413515add301e707387f}{sample\+My\+Multinomial} (int Num\+Of\+Genotypes, unsigned int N, const double p\mbox{[}$\,$\mbox{]}, unsigned int new\+Generationp\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em sample from multinomial function \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+random variable class 
+
+an object oriented interface for sampling from distributions using gsl 
+
+Definition at line 9 of file randomv.\+h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classrandomv_a82d37b6df4f44746c5858578c265cd96}\label{classrandomv_a82d37b6df4f44746c5858578c265cd96}} 
+\index{randomv@{randomv}!randomv@{randomv}}
+\index{randomv@{randomv}!randomv@{randomv}}
+\subsubsection{\texorpdfstring{randomv()}{randomv()}}
+{\footnotesize\ttfamily randomv\+::randomv (\begin{DoxyParamCaption}\item[{unsigned long}]{seed }\end{DoxyParamCaption})}
+
+
+
+default constructor 
+
+constructor with seed 
+
+Definition at line 16 of file randomv.\+cpp.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classrandomv_afa56a12aa1bb44d7d4bd2a84303d9dca}\label{classrandomv_afa56a12aa1bb44d7d4bd2a84303d9dca}} 
+\index{randomv@{randomv}!sample\+Exponential@{sample\+Exponential}}
+\index{sample\+Exponential@{sample\+Exponential}!randomv@{randomv}}
+\subsubsection{\texorpdfstring{sample\+Exponential()}{sampleExponential()}}
+{\footnotesize\ttfamily double randomv\+::sample\+Exponential (\begin{DoxyParamCaption}\item[{double}]{mu }\end{DoxyParamCaption})}
+
+
+
+sample from a normal distribution with mean 0 and standard deviation sigma 
+
+Sample a random number from an exponential distribution with mean mu. 
+
+Definition at line 47 of file randomv.\+cpp.
+
+\mbox{\Hypertarget{classrandomv_a574eadd80c9cc66756c3417e55f2655c}\label{classrandomv_a574eadd80c9cc66756c3417e55f2655c}} 
+\index{randomv@{randomv}!sample\+Normal@{sample\+Normal}}
+\index{sample\+Normal@{sample\+Normal}!randomv@{randomv}}
+\subsubsection{\texorpdfstring{sample\+Normal()}{sampleNormal()}}
+{\footnotesize\ttfamily double randomv\+::sample\+Normal (\begin{DoxyParamCaption}\item[{double}]{sigma }\end{DoxyParamCaption})}
+
+
+
+sample from a normal distribution with mean mu and standard deviation sigma 
+
+Sample a random number from a normal distribution. 
+
+Definition at line 38 of file randomv.\+cpp.
+
+\mbox{\Hypertarget{classrandomv_a0d1def37be5addf36b11234e3a7b29d3}\label{classrandomv_a0d1def37be5addf36b11234e3a7b29d3}} 
+\index{randomv@{randomv}!sample\+Uniform@{sample\+Uniform}}
+\index{sample\+Uniform@{sample\+Uniform}!randomv@{randomv}}
+\subsubsection{\texorpdfstring{sample\+Uniform()}{sampleUniform()}}
+{\footnotesize\ttfamily double randomv\+::sample\+Uniform (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+constructor with seed 
+
+Sample a random number from uniform distribution \mbox{[}0,1) 
+
+Definition at line 23 of file randomv.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/randomv.\+h\item 
+src/randomv.\+cpp\end{DoxyCompactItemize}

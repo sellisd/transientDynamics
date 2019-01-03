@@ -1,0 +1,77 @@
+\hypertarget{classgame_of_life}{}\section{game\+Of\+Life Class Reference}
+\label{classgame_of_life}\index{game\+Of\+Life@{game\+Of\+Life}}
+
+
+{\ttfamily \#include $<$game\+Of\+Life.\+h$>$}
+
+
+
+Inheritance diagram for game\+Of\+Life\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgame_of_life__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for game\+Of\+Life\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classgame_of_life__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classgame_of_life_aa6b581822e3bc0ab045afebd7288d55e}\label{classgame_of_life_aa6b581822e3bc0ab045afebd7288d55e}} 
+\hyperlink{classgame_of_life_aa6b581822e3bc0ab045afebd7288d55e}{game\+Of\+Life} (int side)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+int \hyperlink{classgame_of_life_a30febaa79f1e87d35b4eeae4f558fe13}{sumN} (int i, int j)
+\begin{DoxyCompactList}\small\item\em Constructor with system side. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classgame_of_life_a7de2d57809b15f938ad18b8c30ddf9bf}\label{classgame_of_life_a7de2d57809b15f938ad18b8c30ddf9bf}} 
+void \hyperlink{classgame_of_life_a7de2d57809b15f938ad18b8c30ddf9bf}{step} (\hyperlink{classrandomv}{randomv} \&r)
+\begin{DoxyCompactList}\small\item\em Evolve the system by a single step. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Game of Life on flat 2D torus grid 
+
+Definition at line 14 of file game\+Of\+Life.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classgame_of_life_a30febaa79f1e87d35b4eeae4f558fe13}\label{classgame_of_life_a30febaa79f1e87d35b4eeae4f558fe13}} 
+\index{game\+Of\+Life@{game\+Of\+Life}!sumN@{sumN}}
+\index{sumN@{sumN}!game\+Of\+Life@{game\+Of\+Life}}
+\subsubsection{\texorpdfstring{sum\+N()}{sumN()}}
+{\footnotesize\ttfamily int game\+Of\+Life\+::sumN (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+
+
+Constructor with system side. 
+
+Calculate sum of values around cell i,j 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i} & x-\/axis coordinate. \\
+\hline
+\mbox{\tt in}  & {\em j} & y-\/axis coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+sum 
+\end{DoxyReturn}
+
+
+Definition at line 11 of file game\+Of\+Life.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/game\+Of\+Life.\+h\item 
+src/game\+Of\+Life.\+cpp\end{DoxyCompactItemize}

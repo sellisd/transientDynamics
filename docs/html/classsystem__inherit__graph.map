@@ -1,0 +1,4 @@
+<map id="system" name="system">
+<area shape="rect" id="node2" href="$classgame_of_life.html" title="{gameOfLife\n||+ gameOfLife()\l+ gameOfLife()\l+ sumN()\l+ step()\l}" alt="" coords="5,313,116,427"/>
+<area shape="rect" id="node3" href="$classgas_mixing.html" title="{gasMixing\n||+ gasMixing()\l+ gasMixing()\l+ step()\l+ swap()\l}" alt="" coords="140,313,242,427"/>
+</map>

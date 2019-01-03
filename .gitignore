@@ -71,3 +71,7 @@ rsconnect/
 *.exe
 *.out
 *.app
+
+#other
+run/
+ms/

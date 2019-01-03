@@ -1,0 +1,3 @@
+<map id="gameOfLife" name="gameOfLife">
+<area shape="rect" id="node2" href="$classsystem.html" title="{system\n||+ system()\l+ system()\l+ getSide()\l+ setSide()\l+ set()\l+ get()\l+ fillRandom()\l+ gradientLinear()\l+ tick()\l+ gridInit()\l+ fillSquare()\l+ run()\l+ printV()\l+ step()\l+ sigmoid()\l}" alt="" coords="5,5,132,265"/>
+</map>

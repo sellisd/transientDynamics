@@ -1,0 +1,272 @@
+\hypertarget{classsystem}{}\section{system Class Reference}
+\label{classsystem}\index{system@{system}}
+
+
+{\ttfamily \#include $<$system.\+h$>$}
+
+
+
+Inheritance diagram for system\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{classsystem__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for system\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classsystem__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classsystem_a8e1d6ac8f175a0069a3c5cbcbe058ed9}\label{classsystem_a8e1d6ac8f175a0069a3c5cbcbe058ed9}} 
+\hyperlink{classsystem_a8e1d6ac8f175a0069a3c5cbcbe058ed9}{system} (void)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classsystem_a1792d5fc1f824113d7852a8f99416495}\label{classsystem_a1792d5fc1f824113d7852a8f99416495}} 
+\hyperlink{classsystem_a1792d5fc1f824113d7852a8f99416495}{system} (int side)
+\begin{DoxyCompactList}\small\item\em Constructor with system side. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classsystem_a7480d03afdf71f4e1afc757a323faf6c}\label{classsystem_a7480d03afdf71f4e1afc757a323faf6c}} 
+int \hyperlink{classsystem_a7480d03afdf71f4e1afc757a323faf6c}{get\+Side} (void)
+\begin{DoxyCompactList}\small\item\em Get side of system\textquotesingle{}s world. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classsystem_ae139efd3a2598bc297b9224868058d7d}\label{classsystem_ae139efd3a2598bc297b9224868058d7d}} 
+void \hyperlink{classsystem_ae139efd3a2598bc297b9224868058d7d}{set\+Side} (int a)
+\begin{DoxyCompactList}\small\item\em Set side of system\textquotesingle{}s world. \end{DoxyCompactList}\item 
+void \hyperlink{classsystem_a0c16c03ebc2912428bb83ec8310533d3}{set} (int i, int j, int value)
+\item 
+int \hyperlink{classsystem_a515cbef246f97a9eb89ce36324fee14e}{get} (int i, int j)
+\item 
+void \hyperlink{classsystem_a774fdf388271bf46bf1125cc186e32d6}{fill\+Random} (\hyperlink{classrandomv}{randomv} \&r, double p)
+\item 
+void \hyperlink{classsystem_a720cb2d9e63c4ae5a704e912359ad009}{gradient\+Linear} (\hyperlink{classrandomv}{randomv} \&r)
+\item 
+\mbox{\Hypertarget{classsystem_ada156ed7f1068472dcede241f659a24a}\label{classsystem_ada156ed7f1068472dcede241f659a24a}} 
+void \hyperlink{classsystem_ada156ed7f1068472dcede241f659a24a}{tick} ()
+\begin{DoxyCompactList}\small\item\em Evolve the system by a single step. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classsystem_adfc9931a4de3d0fca13773ac86c9c63f}\label{classsystem_adfc9931a4de3d0fca13773ac86c9c63f}} 
+void \hyperlink{classsystem_adfc9931a4de3d0fca13773ac86c9c63f}{grid\+Init} (void)
+\begin{DoxyCompactList}\small\item\em initialize system world \end{DoxyCompactList}\item 
+void \hyperlink{classsystem_ae1cb4d26da7e546b5a6bb1c5b21d1abe}{fill\+Square} (\hyperlink{classrandomv}{randomv} \&r, int window, double p)
+\begin{DoxyCompactList}\small\item\em Fill a square region of the environmnet. \end{DoxyCompactList}\item 
+void \hyperlink{classsystem_a96961c5218682019c8d1f9f1a01512f1}{run} (int replicate\+ID, int Tmax, \hyperlink{classrandomv}{randomv} \&r, ostream \&sout, ostream \&wout, ostream \&vout, \hyperlink{classentropy}{entropy} \&entropy\+Functions, int byS, int byW, int byV)
+\begin{DoxyCompactList}\small\item\em Run the simulation. \end{DoxyCompactList}\item 
+void \hyperlink{classsystem_a5536661225ddf0de78c4b81fd8b34978}{printV} (int t, ostream \&vout)
+\item 
+\mbox{\Hypertarget{classsystem_aab28302f43e7ee42da51eb723f091533}\label{classsystem_aab28302f43e7ee42da51eb723f091533}} 
+virtual void \hyperlink{classsystem_aab28302f43e7ee42da51eb723f091533}{step} (\hyperlink{classrandomv}{randomv} \&r)
+\begin{DoxyCompactList}\small\item\em Evolve the system by a single step. \end{DoxyCompactList}\item 
+double \hyperlink{classsystem_ac4e59474bfe93c5ca7ac46a79d738a4b}{sigmoid} (double L, double k, double x0, double x)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract system 
+
+Definition at line 13 of file system.\+h.
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classsystem_a774fdf388271bf46bf1125cc186e32d6}\label{classsystem_a774fdf388271bf46bf1125cc186e32d6}} 
+\index{system@{system}!fill\+Random@{fill\+Random}}
+\index{fill\+Random@{fill\+Random}!system@{system}}
+\subsubsection{\texorpdfstring{fill\+Random()}{fillRandom()}}
+{\footnotesize\ttfamily void system\+::fill\+Random (\begin{DoxyParamCaption}\item[{\hyperlink{classrandomv}{randomv} \&}]{r,  }\item[{double}]{p }\end{DoxyParamCaption})}
+
+Fill cells in central cell of grid with probability p 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em r} & Reference to random class generator \\
+\hline
+ & {\em p} & Probability of filling cell with value of 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_ae1cb4d26da7e546b5a6bb1c5b21d1abe}\label{classsystem_ae1cb4d26da7e546b5a6bb1c5b21d1abe}} 
+\index{system@{system}!fill\+Square@{fill\+Square}}
+\index{fill\+Square@{fill\+Square}!system@{system}}
+\subsubsection{\texorpdfstring{fill\+Square()}{fillSquare()}}
+{\footnotesize\ttfamily void system\+::fill\+Square (\begin{DoxyParamCaption}\item[{\hyperlink{classrandomv}{randomv} \&}]{r,  }\item[{int}]{window,  }\item[{double}]{p }\end{DoxyParamCaption})}
+
+
+
+Fill a square region of the environmnet. 
+
+Fills with 1s a square subregion of the environmnet. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em r} & Instance of random number generator class. \\
+\hline
+\mbox{\tt in}  & {\em window} & Side of subregion to be filled in. \\
+\hline
+\mbox{\tt in}  & {\em p} & Probability of filling each cell within subregion. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_a515cbef246f97a9eb89ce36324fee14e}\label{classsystem_a515cbef246f97a9eb89ce36324fee14e}} 
+\index{system@{system}!get@{get}}
+\index{get@{get}!system@{system}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily int system\+::get (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+Get value of cell i,j in systems world 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i} & x-\/axis coordinate. \\
+\hline
+\mbox{\tt in}  & {\em j} & y-\/axis coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Value of cell i,j 
+\end{DoxyReturn}
+
+
+Definition at line 39 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_a720cb2d9e63c4ae5a704e912359ad009}\label{classsystem_a720cb2d9e63c4ae5a704e912359ad009}} 
+\index{system@{system}!gradient\+Linear@{gradient\+Linear}}
+\index{gradient\+Linear@{gradient\+Linear}!system@{system}}
+\subsubsection{\texorpdfstring{gradient\+Linear()}{gradientLinear()}}
+{\footnotesize\ttfamily void system\+::gradient\+Linear (\begin{DoxyParamCaption}\item[{\hyperlink{classrandomv}{randomv} \&}]{r }\end{DoxyParamCaption})}
+
+Fill the grid with a linear density gradient 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em r} & Instance of random number generator class \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+
+
+Definition at line 67 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_a5536661225ddf0de78c4b81fd8b34978}\label{classsystem_a5536661225ddf0de78c4b81fd8b34978}} 
+\index{system@{system}!printV@{printV}}
+\index{printV@{printV}!system@{system}}
+\subsubsection{\texorpdfstring{print\+V()}{printV()}}
+{\footnotesize\ttfamily void system\+::printV (\begin{DoxyParamCaption}\item[{int}]{t,  }\item[{ostream \&}]{vout }\end{DoxyParamCaption})}
+
+Print state vector of system at cycle t 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em t} & The cycle t \\
+\hline
+\mbox{\tt in}  & {\em vout} & Output stream \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+
+
+Definition at line 152 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_a96961c5218682019c8d1f9f1a01512f1}\label{classsystem_a96961c5218682019c8d1f9f1a01512f1}} 
+\index{system@{system}!run@{run}}
+\index{run@{run}!system@{system}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void system\+::run (\begin{DoxyParamCaption}\item[{int}]{replicate\+ID,  }\item[{int}]{Tmax,  }\item[{\hyperlink{classrandomv}{randomv} \&}]{r,  }\item[{ostream \&}]{sout,  }\item[{ostream \&}]{wout,  }\item[{ostream \&}]{vout,  }\item[{\hyperlink{classentropy}{entropy} \&}]{entropy\+Functions,  }\item[{int}]{byS,  }\item[{int}]{byW,  }\item[{int}]{byV }\end{DoxyParamCaption})}
+
+
+
+Run the simulation. 
+
+Performs a simulation run and calculates relevant statistics. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em replicate\+ID} & Replicate ID of simulation. \\
+\hline
+\mbox{\tt in}  & {\em Tmax} & Run simulations for Tmax steps. \\
+\hline
+\mbox{\tt in}  & {\em r} & Random number generation class. \\
+\hline
+\mbox{\tt out}  & {\em sout} & Statistics on three subgrids. \\
+\hline
+\mbox{\tt out}  & {\em wout} & Statistics on coarse grained grid. \\
+\hline
+\mbox{\tt out}  & {\em vout} & Output stream of the state of the system for each generation. \\
+\hline
+\mbox{\tt in}  & {\em byS} & Log sout every byS generations. \\
+\hline
+\mbox{\tt in}  & {\em byW} & Log wout every byS generations. \\
+\hline
+\mbox{\tt in}  & {\em byV} & Log vout every byS generations. \\
+\hline
+\mbox{\tt in}  & {\em entropy\+Functions} & Entropy functions instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_a0c16c03ebc2912428bb83ec8310533d3}\label{classsystem_a0c16c03ebc2912428bb83ec8310533d3}} 
+\index{system@{system}!set@{set}}
+\index{set@{set}!system@{system}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily void system\+::set (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j,  }\item[{int}]{value }\end{DoxyParamCaption})}
+
+Set value of cell i,j in systems world 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em i} & x-\/axis coordinate. \\
+\hline
+\mbox{\tt in}  & {\em j} & y-\/axis coordinate. \\
+\hline
+\mbox{\tt in}  & {\em value} & Value to set cell i,j. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+
+
+Definition at line 31 of file system.\+cpp.
+
+\mbox{\Hypertarget{classsystem_ac4e59474bfe93c5ca7ac46a79d738a4b}\label{classsystem_ac4e59474bfe93c5ca7ac46a79d738a4b}} 
+\index{system@{system}!sigmoid@{sigmoid}}
+\index{sigmoid@{sigmoid}!system@{system}}
+\subsubsection{\texorpdfstring{sigmoid()}{sigmoid()}}
+{\footnotesize\ttfamily double system\+::sigmoid (\begin{DoxyParamCaption}\item[{double}]{L,  }\item[{double}]{k,  }\item[{double}]{x0,  }\item[{double}]{x }\end{DoxyParamCaption})}
+
+Generalized logistic function 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em L} & The maximum value of the curve \\
+\hline
+\mbox{\tt in}  & {\em k} & The steepness of the curve \\
+\hline
+\mbox{\tt in}  & {\em x0} & The x-\/value of the midpoint \\
+\hline
+\mbox{\tt in}  & {\em x} & The value for which the function is computed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+$f(x) = \frac{L}{1 + e^{-k()x-x_0}}$ 
+\end{DoxyReturn}
+
+
+Definition at line 77 of file system.\+cpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/system.\+h\item 
+src/system.\+cpp\end{DoxyCompactItemize}

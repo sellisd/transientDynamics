@@ -5,7 +5,7 @@
 
 |Gas Mixing Model | Game Of Life |
 |-----------------|--------------|
-| <img src="ms/figs/GasMixingAnimation.gif" alt="Gas mixing animation" onerror="this.onerror=null;this.src='../../ms/figs/GasMixingAnimation.gif';" width="100" height="100" /> | <img src="ms/figs/GameOfLifeAnimation.gif" alt="Gama of life animation" onerror="this.onerror=null;this.src='../../ms/figs/GameOfLifeAnimation.gif';" width="100" height="100" />  |
+| <img src="ms/figs/GasMixingAnimation.gif" alt="Gas mixing animation" onerror="this.onerror=null;this.src='../ms/figs/GasMixingAnimation.gif';" width="100" height="100" /> | <img src="ms/figs/GameOfLifeAnimation.gif" alt="Gama of life animation" onerror="this.onerror=null;this.src='../ms/figs/GameOfLifeAnimation.gif';" width="100" height="100" />  |
 </center>
 
 <hr>

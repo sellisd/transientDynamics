@@ -109,7 +109,7 @@ dev.off()
 png(file.path(figsPath, "CoarseGrainedStatsGasMixingab.png"), width = 7, height = 5, units = "in", res = 300)
 
 df <- gather(gmcgstats, "Measure", "Statistic", K1mean, Hmean)
-df$Measure[df$Measure=="K1mean"] = "Kolmogorov Komplexity"
+df$Measure[df$Measure=="K1mean"] = "Kolmogorov complexity"
 df$Measure[df$Measure=="Hmean"] = "Information entropy"
 df %>%
   group_by(generation, Measure) %>%
@@ -168,7 +168,7 @@ png(file.path(figsPath, "CoarseGrainedStatsGameOfLifeab.png"), width = 7, height
 df <- (golcgstats %>% 
        filter(generation <= 50) %>% 
        gather("Measure", "Statistic", K1mean, Hmean))
-df$Measure[df$Measure=="K1mean"] = "Kolmogorov Komplexity"
+df$Measure[df$Measure=="K1mean"] = "Kolmogorov complexity"
 df$Measure[df$Measure=="Hmean"] = "Information entropy"
 df %>%
   group_by(generation, Measure) %>% summarise(mean = mean(Statistic), sd = sd(Statistic)) %>% 
